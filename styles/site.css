@@ -90,6 +90,7 @@ p {
 
 .site-nav a {
   color: var(--muted);
+  font-size: 0.84rem;
   padding-bottom: 0.2rem;
 }
 
