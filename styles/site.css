@@ -183,6 +183,20 @@ main {
 }
 
 @media (min-width: 761px) {
+  .site-nav a {
+    font-size: 1rem;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) 200px;
+    gap: 1.25rem;
+    padding-bottom: 1.1rem;
+  }
+
+  .hero-photo {
+    width: 200px;
+  }
+
   .contact-links {
     gap: 0.55rem 1.05rem;
   }
