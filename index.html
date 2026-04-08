@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Atal Narayan Sahu works across AI systems, scientific machine learning, and quantum science." />
   <title>Atal Narayan Sahu</title>
-  <link rel="stylesheet" href="styles/site.css?v=20260408-01" />
+  <link rel="stylesheet" href="styles/site.css?v=20260408-02" />
 </head>
 <body>
   <header class="site-header">
@@ -32,10 +32,6 @@
           <a class="contact-link" href="mailto:atalnsahu@gmail.com">
             <img src="images/icons/email.svg" alt="" />
             <span>Email</span>
-          </a>
-          <a class="contact-link" href="files/cv.pdf" target="_blank" rel="noreferrer">
-            <img src="images/icons/cv.svg" alt="" />
-            <span>CV</span>
           </a>
           <a class="contact-link" href="https://github.com/atalnarayan" target="_blank" rel="noreferrer">
             <img src="images/logos/github.png" alt="" />
@@ -100,10 +96,10 @@
                 <p class="timeline-meta">Master of Quantum Science and Technology</p>
               </div>
             </div>
-            <p>
-              Developing a prior-aware extension of COPRA for ultrafast pulse retrieval by integrating analytic,
-              physics-informed, and learned denoising priors into the iterative retrieval loop.
-            </p>
+            <ul class="timeline-list">
+              <li>Developing deep learning and generative modeling methods for scientific inverse problems, with current work on ultrafast pulse retrieval using learned priors and flow matching.</li>
+              <li>Implementing Randomized and Deterministic Benchmarking protocols for single and multi-qubit gates on NMR and IBM quantum processors via Qiskit, characterizing gate fidelities and error rates.</li>
+            </ul>
           </div>
         </article>
 
@@ -119,10 +115,9 @@
                 <p class="timeline-meta">Senior Software Engineer</p>
               </div>
             </div>
-            <p>
-              Engineered a scalable ClickHouse data warehouse with dbt for analytics and built optimized ranking
-              systems with secure multi-tenant social feed architecture in Go.
-            </p>
+            <ul class="timeline-list">
+              <li>Architected a Couchbase to ClickHouse ELT pipeline via materialized views, enabling sub-100 ms dashboard latency and sub-1 minute refresh SLAs for outreach operations handling 100K+ calls per day.</li>
+            </ul>
           </div>
         </article>
 
@@ -134,14 +129,15 @@
                 <img src="images/history/regology.avif" alt="Regology logo" />
               </div>
               <div>
-                <h3>Regology</h3>
+                <h3>Regology, Inc.</h3>
                 <p class="timeline-meta">Senior Data Scientist</p>
               </div>
             </div>
-            <p>
-              Led Reggi, a RAG-based legal AI assistant built on in-house semantic search and LLM workflows,
-              and applied state-of-the-art NLP methods across legal corpora.
-            </p>
+            <ul class="timeline-list">
+              <li>Technical lead for Reggi, a RAG-based legal AI assistant, driving core design across ingestion, hybrid retrieval, and answer generation while consolidating fragmented regulatory research workflows for enterprise law librarians.</li>
+              <li>Architected a two-level hierarchical search system in Elasticsearch, combining BM25 lexical retrieval and dense semantic embeddings for 1M+ legal documents across corpora, improving Recall@10 by 5.7x.</li>
+              <li>Developed a custom keyphrase extraction algorithm for hierarchical legal documents, improving downstream Recall@10 by 1.8x.</li>
+            </ul>
           </div>
         </article>
 
@@ -158,11 +154,11 @@
                 <p class="timeline-meta">M.S. in Computer Science</p>
               </div>
             </div>
-            <p>
-              Developed communication-efficient methods for large-scale distributed machine learning and co-authored
-              work on compressed communication, sparse collectives, and federated learning.
-            </p>
-            <div class="timeline-children" aria-label="Internships during KAUST master's degree">
+            <ul class="timeline-list">
+              <li>Proposed an error minimization framework for gradient sparsification, proving hard-threshold sparsification with error feedback is communication-optimal and validating it on multi-GPU clusters.</li>
+              <li>Co-developed OmniReduce, efficient sparse collective communication primitives that exploit gradient sparsity to maximize effective bandwidth use, accelerating distributed training by up to 8.2x.</li>
+            </ul>
+            <div class="timeline-children" aria-label="Internships during KAUST">
               <article class="timeline-child">
                 <div class="timeline-child-heading">
                   <span class="timeline-child-org">
@@ -173,7 +169,7 @@
                   <span class="timeline-child-date">2020</span>
                 </div>
                 <p class="timeline-meta timeline-child-meta">Summer Research Intern · STARS Team</p>
-                <p class="timeline-child-summary">Explored weakly supervised methods for activity detection in videos when annotations are limited or incomplete.</p>
+                <p class="timeline-child-summary">Designed a novel ordering-loss framework for weakly supervised action segmentation, using ordered action pairs to model temporal structure without pseudo-label generation or costly Viterbi-based training.</p>
               </article>
             </div>
           </div>
@@ -189,12 +185,10 @@
               <div>
                 <h3>Indian Institute of Technology, Kanpur</h3>
                 <p class="timeline-meta">B.S. in Mathematics and Scientific Computing</p>
+                <p class="timeline-meta">Minors in Algorithms and Machine Learning</p>
               </div>
             </div>
-            <p>
-              Minor coursework in Algorithms and Machine Learning.
-            </p>
-            <div class="timeline-children" aria-label="Internships during IIT Kanpur degree">
+            <div class="timeline-children" aria-label="Internships during IIT Kanpur">
               <article class="timeline-child">
                 <div class="timeline-child-heading">
                   <span class="timeline-child-org">
@@ -205,7 +199,7 @@
                   <span class="timeline-child-date">2017</span>
                 </div>
                 <p class="timeline-meta timeline-child-meta">Summer Research Intern · Optimization and Machine Learning Lab</p>
-                <p class="timeline-child-summary">Researched asynchronous randomized methods for solving large linear systems.</p>
+                <p class="timeline-child-summary">Analyzed asynchronous parallel SGD for consistent linear systems, proving global linear convergence and showing it can outperform synchronous SGD in ill-conditioned regimes.</p>
               </article>
             </div>
           </div>
