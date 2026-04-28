@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Paper review: Learning Interestingness in Automated Mathematical Theory Formation, NeurIPS 2025. Can the judgment of what is worth pursuing in mathematics be learned automatically?" />
+  <title>Can AI Learn What Makes Math Interesting? &middot; Atal Narayan Sahu</title>
+  <link rel="stylesheet" href="../styles/site.css?v=20260408-04" />
+  <style>
+    .post-meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0 0 1.6rem;
+    }
+    .post h2 {
+      font-size: 1.3rem;
+      margin: 1.8rem 0 0.6rem;
+      color: #111827;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+    }
+    .post p,
+    .post li {
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .post ol,
+    .post ul {
+      padding-left: 1.4rem;
+      margin: 0.4rem 0 0.8rem;
+    }
+    .post li {
+      margin-bottom: 0.45rem;
+    }
+    .post hr {
+      border: none;
+      border-top: 1px solid var(--line);
+      margin: 1.8rem 0;
+    }
+    .post code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.87em;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    .post figure {
+      margin: 1.5rem 0;
+      padding: 0.8rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      text-align: center;
+    }
+    .post figure img {
+      display: block;
+      max-width: 100%;
+      margin: 0 auto 0.6rem;
+    }
+    .post figcaption {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+    .post table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+      margin: 0.8rem 0 0.4rem;
+    }
+    .post th {
+      text-align: left;
+      border-bottom: 2px solid var(--line);
+      padding: 0.3rem 0.55rem;
+      color: #111827;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+    }
+    .post td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.28rem 0.55rem;
+      color: var(--text);
+    }
+    .post tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .post .table-caption {
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-style: italic;
+      margin: 0.3rem 0 0.8rem;
+    }
+    .display-math {
+      overflow-x: auto;
+      padding: 0.2rem 0;
+    }
+    .post .references ol {
+      padding-left: 1.3rem;
+    }
+    .post .references li {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 0.45rem;
+    }
+    @media (max-width: 600px) {
+      .post figure { padding: 0.4rem; }
+      .post table { font-size: 0.82rem; }
+      .post th, .post td { padding: 0.22rem 0.35rem; }
+    }
+  </style>
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        macros: {
+          mathscr: ['\\mathcal{#1}', 1]
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="site-title" href="../index.html">Atal Narayan Sahu</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="../index.html">Home</a>
+        <a href="../publications.html">Publications</a>
+        <a class="active" href="../blog.html" aria-current="page">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page-content">
+    <article class="post">
+        <h1>Can AI Learn What Makes Math Interesting?</h1>
+      <p class="post-meta">
+        April&nbsp;28, 2026 &middot; Review of NeurIPS&nbsp;2025 Spotlight &middot;
+        <a href="https://arxiv.org/abs/2511.14778">arXiv:2511.14778</a>
+      </p>
+
+      <h2>Overview</h2>
+
+      <p>AI is now solving problems that stumped mathematicians for decades.
+      AlphaProof and AlphaGeometry&nbsp;2 earned a silver medal at the 2024 International
+      Mathematical Olympiad <a href="https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/">[1]</a>.
+      GPT-5 scores 94.6% on AIME&nbsp;2025 without any tools.
+      AlphaEvolve and Aristotle resolved Erd&#337;s problem&nbsp;#1026, open since 1975.
+      By 2026, problem&nbsp;#281 had also fallen, and Tao was calling AI assistance in his
+      own research &#8220;almost mundane&#8221; <a href="https://arxiv.org/abs/2603.26524">[2]</a>.
+      These are genuine open problems, solved by machines.</p>
+
+      <p>But in every one of these cases, a human decided what the problem was.
+      The IMO problems were written by a committee.
+      Erd&#337;s himself posed problem&nbsp;#1026 in 1975.</p>
+
+      <p>The real gap is not in solving but in creating.
+      When Galois invented group theory, he was not answering a posed question.
+      When Shannon defined information, he was not working from a problem set.
+      When Riemann imagined curved geometry, no one had asked for it.
+      These mathematicians chose what to study and built the language to study it.</p>
+
+      <p>Today&#8217;s AI cannot do that. It can win medals on a test someone else designed,
+      but it cannot design the test. This paper takes a first step toward closing that gap,
+      asking whether a system can learn to decide what is interesting in the first place.</p>
+
+      <p>This paper does not try to give AI the full range of mathematical creativity.
+      Instead it carves out a tractable first sub-problem: can the judgment of
+      &#8220;what is worth pursuing&#8221; (or <em>interestingness</em>
+      <a href="https://eplex.cs.ucf.edu/papers/lehman_ec11.pdf">[3]</a><a href="https://link.springer.com/book/10.1007/978-3-319-15524-1">[4]</a>)
+      be learned automatically?</p>
+
+      <p>It makes two significant contributions:</p>
+      <ol>
+        <li>It introduces <strong>FERMAT</strong> (Formation Environment for
+        Reinforcement-learned Mathematical Theory), which casts automated theory formation
+        as a Markov Decision Process: starting from primitive symbols, the agent builds
+        a knowledge graph of definitions, conjectures, and theorems, earning a sparse
+        reward whenever it independently rediscovers a concept from a curated benchmark.
+        Unlike prior systems like HR <a href="https://doi.org/10.1023/A:1008923120573">[5]</a>
+        and AM <a href="https://searchworks.stanford.edu/view/1370454">[6]</a>, which were
+        static symbolic pipelines with hand-coded heuristics, FERMAT opens the process to
+        any learned RL strategy.</li>
+        <li>It proposes <strong>EvoAbstract</strong>, which solves the resulting
+        reward-sparsity problem by automatically discovering an interestingness measure
+        (represented as a Python program) via LLM-driven evolutionary search over parallel
+        islands; a second LLM periodically distils reusable subroutines from the best
+        candidates into a shared library. The resulting measure recovers roughly 24
+        benchmark concepts from bare primitives, versus 8.6 for the best hand-crafted
+        HR heuristic and 4.4 for a random policy.</li>
+      </ol>
+
+      <hr />
+
+      <h2>The Combinatorial Search Space</h2>
+
+      <p>Take three primitives: zero, the successor function $S$ (so $S(0)=1$, $S(S(0))=2$,
+      and so on), and an equality predicate. From these alone you can start building. Apply
+      an <em>Exists</em> rule to the product relation and you get divisibility. Apply
+      <em>Compose</em> to get powers. Apply <em>Implication</em> to formulate a conjecture
+      about primality. The space of reachable entities grows very quickly.</p>
+
+      <p>At each step there are hundreds of legal actions, and most produce either a trivially
+      true statement or a concept already in the graph under a different name.
+      HR <a href="https://doi.org/10.1023/A:1008923120573">[5]</a> and
+      AM <a href="https://searchworks.stanford.edu/view/1370454">[6]</a> tamed this explosion
+      with hand-tuned heuristics: reward short definitions (<em>parsimony</em>), reward novel
+      example sets (<em>novelty</em>), reward widely applicable concepts (<em>applicability</em>).
+      These heuristics encode real mathematical taste, but they are static. They cannot adapt
+      to a new domain, to the current state of the theory, or to what the agent is trying
+      to build toward.</p>
+
+<p>Instead of hand-coding interestingness, this paper treats it as a learnable function.</p>
+
+      <hr />
+
+      <h2>FERMAT: Theory Formation as Reinforcement Learning</h2>
+
+      <p>FERMAT formalizes theory formation as an MDP
+      $(\mathcal{S}, \mathcal{A}, \mathcal{T}, \mathcal{R})$.</p>
+
+      <p>The <strong>state</strong> $S \in \mathcal{S}$ is a directed knowledge graph
+      $G = (V, E)$. Each node $v \in V \subseteq \mathcal{M}$ is a mathematical entity,
+      categorized as a definition ($\mathcal{D}$), a conjecture ($\mathcal{C}$), or a
+      proven theorem ($\mathscr{T}$). An edge $(u, v)$ records that entity $u$ was used
+      to construct $v$.</p>
+
+      <p>The <strong>action space</strong> $\mathcal{A}$ has three families:</p>
+      <ul>
+        <li><strong>Definition production</strong> ($\mathcal{A}_{def}$): nine rules
+        including <em>Exists</em> (existential quantification over a variable),
+        <em>Specialize</em> (fix a variable to a constant), <em>Compose</em> (chain two
+        definitions), and <em>ForAll</em>.</li>
+        <li><strong>Conjecture production</strong> ($\mathcal{A}_{conj}$): four rules
+        including <em>Implication</em> (assert $P \Rightarrow Q$ over all inputs) and
+        <em>Equivalence</em>.</li>
+        <li><strong>Proof actions</strong> $\mathcal{A}_{proof} = \{prove, disprove\}$:
+        pass the conjecture to Z3; on success it becomes a theorem $\mathscr{T}$, on
+        failure a counterexample is attached.</li>
+      </ul>
+
+      <p>The <strong>reward</strong> is sparse and binary:</p>
+      <p class="display-math">$$\mathcal{R}_{\mathcal{E}}(S, a, S') = \begin{cases} 1 &amp; \text{if } m_{new} \in \mathcal{E} \\ 0 &amp; \text{otherwise} \end{cases}$$</p>
+
+      <p>where $\mathcal{E}$ is a curated benchmark of 180 number-theory entities (from
+      reflexivity of equality up to Goldbach&#8217;s conjecture) and 67 entities over
+      $\mathbb{F}_{27}$.</p>
+
+      <p>The key design insight is that FERMAT strictly subsumes
+      HR <a href="https://doi.org/10.1023/A:1008923120573">[5]</a>: every HR step is
+      a specific FERMAT action, and HR&#8217;s hand-coded heuristic selector is simply one
+      policy. Any RL or search algorithm can be plugged in instead.</p>
+
+      <figure>
+        <img src="../images/posts/fermat/fermat_purple_pi.png"
+             alt="FERMAT MDP overview showing state as a knowledge graph, action families, and sparse reward" />
+        <figcaption>Fig.&nbsp;1: FERMAT: MDP overview showing the state as a knowledge graph, the three action families, and the sparse reward signal. <a href="https://arxiv.org/abs/2511.14778">[7]</a>.</figcaption>
+      </figure>
+
+      <hr />
+
+      <h2>EvoAbstract: Learning the Interestingness Measure</h2>
+
+      <p>The MDP above has an immediate problem: $\mathcal{R}_{\mathcal{E}}$ is so sparse
+      that an RL agent cannot learn from it alone. The fix is an <strong>intrinsic
+      reward</strong> that fires on every step:</p>
+      <p class="display-math">$$\mathcal{R}_{\mathcal{I}}(S, a, S') = \mathcal{I}(m_{new}, S')$$</p>
+
+      <p>where $\mathcal{I}: \mathcal{M} \times \mathcal{S} \to \mathbb{R}$ scores the
+      newly generated entity $m_{new}$ in the context of the current theory $S$. The agent
+      follows policy $\pi_{\mathcal{I}}$, which greedily selects the highest-scoring action
+      at each step.</p>
+
+      <p>Rather than hand-designing $\mathcal{I}$, the paper frames finding it as
+      optimization. The goal is:</p>
+      <p class="display-math">$$\mathcal{I}^* = \arg\max_{\mathcal{I}} \; \mathbb{E}_{\tau \sim \pi_{\mathcal{I}}} \!\left[ \sum_t \gamma^t \, \mathcal{R}_{\mathcal{E}}(S_t, a_t) \right]$$</p>
+
+      <p>A measure that maximizes long-term extrinsic reward is, by definition, the most
+      useful guide.</p>
+
+      <p>$\mathcal{I}$ is represented as a Python program, not a neural network:
+      interpretable, composable, and discovered subroutines can be reused across
+      generations.</p>
+
+      <p>EvoAbstract finds $\mathcal{I}^*$ through a three-step loop over $k = 4$ parallel
+      islands $\mathcal{P}_i$:</p>
+      <ol>
+        <li><strong>Evolution</strong> ($\mathcal{L}_{var}$, GPT-4o-mini): in each
+        generation, the LLM receives the top-performing programs from island $\mathcal{P}_i$
+        and generates new candidates.</li>
+        <li><strong>Abstraction</strong> ($\mathcal{L}_{abs}$): every 8 iterations, a
+        second LLM analyzes high-scoring programs and extracts reusable subroutines into a
+        per-island library $\text{Lib}_i$. These are then made available to
+        $\mathcal{L}_{var}$ for future generations. Example abstractions discovered:
+        <code>compute_example_balance</code> (a learned applicability-like score) and
+        <code>calculate_uniqueness_score_v2</code> (a refined novelty measure).</li>
+        <li><strong>Policy evaluation</strong>: each candidate runs 16 rollouts inside
+        FERMAT; cumulative extrinsic reward is fitness.</li>
+      </ol>
+
+      <figure>
+        <img src="../images/posts/fermat/evoabstract_simplified.png"
+             alt="EvoAbstract three-step loop: Evolution, Abstraction, and Policy Evaluation with shared library" />
+        <figcaption>Fig.&nbsp;2: EvoAbstract: the three-step loop of Evolution, Abstraction, and Policy Evaluation, with the abstraction library Lib<sub><em>i</em></sub> shared across generations. <a href="https://arxiv.org/abs/2511.14778">[7]</a>.</figcaption>
+      </figure>
+
+      <hr />
+
+      <h2>What Did the Agent Actually Discover?</h2>
+
+      <p>The benchmark $\mathcal{E}$ is itself a knowledge graph: chains of dependencies
+      from primitives all the way up to deep results. The figure below shows the path to
+      primality and related concepts.</p>
+
+      <figure>
+        <img src="../images/posts/fermat/gt_primes.png"
+             alt="Ground-truth benchmark subgraph showing derivation chain to prime-related concepts" />
+        <figcaption>Fig.&nbsp;3: Subgraph of the ground-truth benchmark showing the derivation chain from primitives to prime-related concepts including Goldbach&#8217;s conjecture. <a href="https://arxiv.org/abs/2511.14778">[7]</a>.</figcaption>
+      </figure>
+
+      <p>Starting from <code>succ_zero_eq</code> (zero, $S$, $=$), the agent independently
+      rediscovered addition, multiplication, divisibility, and the $\tau$ function (count of
+      divisors), without being told any of these concepts exist. From the richer
+      <code>arithmetic_base</code> starting point, powers and primality both emerged on
+      their own.</p>
+
+      <p>The learned theories are shown below; purple nodes are ground-truth matches.</p>
+
+      <figure>
+        <img src="../images/posts/fermat/learnedgraphs.png"
+             alt="Knowledge graphs produced by the agent on succ_zero_eq and arithmetic_base with purple nodes marking ground-truth matches" />
+          <figcaption>Fig.&nbsp;4: Knowledge graphs produced by the agent on <code>succ_zero_eq</code> (top) and <code>arithmetic_base</code> (bottom). Purple nodes indicate concepts matching the ground-truth benchmark. <a href="https://arxiv.org/abs/2511.14778">[7]</a>.</figcaption>
+      </figure>
+
+      <p>In $\mathbb{F}_{27}$, the agent found <code>ff_sum_three_times</code> but stalled
+      before the characteristic-3 conjecture: that result requires a derivation chain longer
+      than the current policy template supports, pointing to a clear direction for future
+      work.</p>
+
+      <hr />
+
+      <h2>Results</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th><code>succ_zero_eq</code></th>
+            <th><code>arithmetic_base</code></th>
+            <th><code>ff_27</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Random</td>
+            <td>4.68</td><td>4.44</td><td>2.33</td>
+          </tr>
+          <tr>
+            <td>Best HR (comprehensibility)</td>
+            <td>8.23</td><td>8.55</td><td>5.38</td>
+          </tr>
+          <tr>
+            <td>GPT-4o best (64&nbsp;samples)</td>
+            <td>8.21</td><td>9.45</td><td>3.50</td>
+          </tr>
+          <tr>
+            <td>FunSearch</td>
+            <td>10.23</td><td>22.41</td><td>11.34</td>
+          </tr>
+          <tr>
+            <td><strong>EvoAbstract</strong></td>
+            <td><strong>9.62</strong></td><td><strong>23.98</strong></td><td><strong>9.82</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="table-caption">Average ground-truth entities recovered per episode (higher is better).</p>
+
+      <figure>
+        <img src="../images/posts/fermat/abszffplot.png"
+             alt="Learning curves for EvoAbstract and FunSearch versus all baselines across three domains" />
+        <figcaption>Fig.&nbsp;5: Learning curves for EvoAbstract and FunSearch versus all baselines, across three starting configurations. Both methods dominate all static baselines universally. <a href="https://arxiv.org/abs/2511.14778">[7]</a>.</figcaption>
+      </figure>
+
+      <p>EvoAbstract and FunSearch both dominate all static baselines by a large margin.
+      The best HR heuristic (comprehensibility) and even the best of 64 GPT-4o programs
+      score below 10 on every domain; evolutionary search is decisive.</p>
+
+      <p>On <code>arithmetic_base</code>, EvoAbstract edges ahead of FunSearch
+      (23.98 vs&nbsp;22.41): the abstraction library pays off when the domain is rich enough
+      to reward composable sub-computations. On the other two domains, EvoAbstract optimizes
+      quickly early on but plateaus sooner. Once $\text{Lib}_i$ solidifies,
+      $\mathcal{L}_{var}$ struggles to generate sufficiently diverse programs, a phenomenon
+      the authors call &#8220;abstraction lock-in.&#8221;</p>
+
+      <p>In conclusion, the paper&#8217;s interestingness measure discovered by evolutionary search outperforms decades of manually crafted heuristics, signifying that interestingness can be learned.</p>
+
+      <hr />
+
+      <section class="references">
+        <h2>References</h2>
+        <ol>
+          <li>DeepMind, &#8220;AI solves IMO problems at silver medal level,&#8221;
+          July&nbsp;2024.
+          <a href="https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/">deepmind.google/&hellip;</a></li>
+          <li>T. Tao and T. Klowden, &#8220;Mathematical methods and human thought in the
+          age of AI,&#8221; arXiv:2603.26524, March&nbsp;2026.
+          <a href="https://arxiv.org/abs/2603.26524">arxiv.org/abs/2603.26524</a></li>
+          <li>J. Lehman and K.&nbsp;O. Stanley, &#8220;Abandoning Objectives: Evolution
+          Through the Search for Novelty Alone,&#8221; <em>Evolutionary Computation</em>,
+          vol.&nbsp;19, no.&nbsp;2, 2011.
+          <a href="https://eplex.cs.ucf.edu/papers/lehman_ec11.pdf">eplex.cs.ucf.edu/&hellip;</a></li>
+          <li>K.&nbsp;O. Stanley and J. Lehman, <em>Why Greatness Cannot Be Planned:
+          The Myth of the Objective</em>, Springer, 2015.
+          <a href="https://link.springer.com/book/10.1007/978-3-319-15524-1">springer.com/&hellip;</a></li>
+          <li>S. Colton, A. Bundy, and T. Walsh, &#8220;HR: Automatic Concept Formation
+          in Pure Mathematics,&#8221; <em>Automated Software Engineering</em>,
+          vol.&nbsp;17, no.&nbsp;1, 2000.
+          <a href="https://doi.org/10.1023/A:1008923120573">doi.org/10.1023/A:1008923120573</a></li>
+          <li>D.&nbsp;B. Lenat, &#8220;AM: An artificial intelligence approach to
+          discovery in mathematics as heuristic search,&#8221; PhD thesis, Stanford
+          University, 1977.
+          <a href="https://searchworks.stanford.edu/view/1370454">searchworks.stanford.edu/&hellip;</a></li>
+          <li>G. Tsoukalas, R. Saha, A. Thakur, S. Reguyal, and S. Chaudhuri,
+          &#8220;Learning Interestingness in Automated Mathematical Theory Formation,&#8221;
+          NeurIPS&nbsp;2025 (Spotlight).
+          <a href="https://arxiv.org/abs/2511.14778">arxiv.org/abs/2511.14778</a></li>
+          <li>B. Romera-Paredes et&nbsp;al., &#8220;Mathematical discoveries from program search with large language models,&#8221; <em>Nature</em>, vol.&nbsp;625, pp.&nbsp;468&ndash;475, 2024. <a href="https://www.nature.com/articles/s41586-023-06924-6">nature.com/&hellip;</a></li>
+          <li>K. Ellis et&nbsp;al., &#8220;DreamCoder: Bootstrapping inductive program synthesis with wake-sleep library learning,&#8221; in Proc. PLDI, 2021. <a href="https://arxiv.org/abs/2006.08381">arxiv.org/abs/2006.08381</a></li>
+          <li>T.&nbsp;H. Trinh et&nbsp;al., &#8220;Solving olympiad geometry without human demonstrations,&#8221; <em>Nature</em>, vol.&nbsp;625, pp.&nbsp;476&ndash;482, 2024. <a href="https://www.nature.com/articles/s41586-023-06747-5">nature.com/&hellip;</a></li>
+          <li>Y. Ma et&nbsp;al., &#8220;Eureka: Human-level reward design via coding large language models,&#8221; in Proc. ICLR, 2024. <a href="https://arxiv.org/abs/2310.12931">arxiv.org/abs/2310.12931</a></li>
+          <li>D. Pathak et&nbsp;al., &#8220;Curiosity-driven exploration by self-supervised prediction,&#8221; in Proc. ICML, 2017. <a href="https://arxiv.org/abs/1705.05363">arxiv.org/abs/1705.05363</a></li>
+        </ol>
+      </section>
+    </article>
+  </main>
+
+</body>
+</html>
