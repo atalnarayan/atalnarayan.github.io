@@ -321,10 +321,16 @@ main {
   .profile-sidebar {
     position: static;
     max-width: 260px;
+    margin: 0 auto;
+    text-align: center;
   }
 
   .profile-content {
     padding-top: 0;
+  }
+
+  .contact-links {
+    justify-content: center;
   }
 
 }
